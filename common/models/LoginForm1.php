@@ -1,5 +1,5 @@
 <?php
-namespace backend\models;
+namespace common\models;
 
 use Yii;
 use yii\base\Model;
@@ -7,14 +7,13 @@ use yii\base\Model;
 /**
  * Login form
  */
-class AdminForm extends Model
+class LoginForm1 extends Model
 {
     public $username;
     public $password;
     public $rememberMe = true;
 
     private $_user;
-
 
     /**
      * {@inheritdoc}
@@ -45,8 +44,6 @@ class AdminForm extends Model
             if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, "Sai tài khoản hoặc mật khẩu");
             }
-            // var_dump($user->validatePassword($this->password));
-            // die();
         }
     }
 
@@ -57,20 +54,20 @@ class AdminForm extends Model
      */
     public function login()
     {
-        // var_dump($this->validate());
-        // die();// still true
         if ($this->validate()) {
-        //     var_dump($this->validate());
-        // die();// still true
-            $a= Yii::$app->admin->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
-            return $a;
-             // var_dump($a);
-             // die();
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
-        // var_dump($this->validate());
-        // die();
+        
         return false;
     }
+    // public function loginAdmin()
+    // {
+    //     if ($this->validate()) {
+    //         return Yii::$app->user->login($this->getUserAdmin(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+    //     }
+        
+    //     return false;
+    // }
 
     /**
      * Finds user by [[username]]
@@ -79,12 +76,18 @@ class AdminForm extends Model
      */
     protected function getUser()
     {
-        if ($this->_user === null) {
+         if ($this->_user === null) {
             $this->_user = Admin::findByUsername($this->username);
-
         }
 
         return $this->_user;
     }
-   
+    //   protected function getUserAdmin()
+    // {
+    //     if ($this->_user === null) {
+    //         $this->_user = Admin::findByUsername($this->username);
+    //     }
+
+    //     return $this->_user;
+    // }
 }

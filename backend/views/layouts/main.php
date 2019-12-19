@@ -48,7 +48,9 @@ AppAsset::register($this);
           Hoàng Quỳnh Anh
         </a>
       </div>
-        
+        <?php 
+
+        var_dump(Yii::$app->user); die(); ?>
 
        ?>
       <div class="sidebar-wrapper">

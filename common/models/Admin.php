@@ -126,7 +126,7 @@ class Admin extends ActiveRecord implements IdentityInterface
      */
     public function getId()
     {
-        return 1;
+        return $this->getPrimaryKey();
     }
     public function getPassword(){
         $password=$this->password;

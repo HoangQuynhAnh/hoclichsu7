@@ -85,7 +85,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new LoginForm();
+        $model = new AdminForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
         //     var_dump("<pre>");
