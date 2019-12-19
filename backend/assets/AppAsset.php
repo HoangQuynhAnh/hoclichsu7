@@ -28,6 +28,7 @@ class AppAsset extends AssetBundle
   "assets/css/bootstrap.min.css",
   "assets/css/paper-dashboard.css?v=2.0.0",
   "assets/demo/demo.css",
+  
     ];
     public $js = [
         "vendor/jquery/jquery-3.2.1.min.js",

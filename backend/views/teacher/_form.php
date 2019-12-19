@@ -36,6 +36,9 @@ use backend\models\ClassRoom;
 
 </div>
 <style>
+    #teacherform-status, #teacherform-sex{
+        height: 40px;
+    }
     #teacher-status, #teacher-sex{
         height: 40px;
     }

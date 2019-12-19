@@ -45,6 +45,8 @@ class AdminForm extends Model
             if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, "Sai tài khoản hoặc mật khẩu");
             }
+            // var_dump($user->validatePassword($this->password));
+            // die();
         }
     }
 
@@ -55,10 +57,18 @@ class AdminForm extends Model
      */
     public function login()
     {
+        // var_dump($this->validate());
+        // die();// still true
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+        //     var_dump($this->validate());
+        // die();// still true
+            $a= Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+            return $a;
+             // var_dump($a);
+             // die();
         }
-        
+        // var_dump($this->validate());
+        // die();
         return false;
     }
 
@@ -71,6 +81,7 @@ class AdminForm extends Model
     {
         if ($this->_user === null) {
             $this->_user = Admin::findByUsername($this->username);
+
         }
 
         return $this->_user;

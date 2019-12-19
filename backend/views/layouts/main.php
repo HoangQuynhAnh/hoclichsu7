@@ -48,6 +48,9 @@ AppAsset::register($this);
           Hoàng Quỳnh Anh
         </a>
       </div>
+        
+
+       ?>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li>
@@ -77,7 +80,7 @@ AppAsset::register($this);
             <?php 
              echo Html::a('<i class="nc-icon nc-spaceship"></i><p>Thoát</p>',['/site/logout'],['data-method'=>'post'])
              ?>
-          </li>
+          
            
         </ul>
       </div>

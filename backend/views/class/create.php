@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 
+use yii\grid\GridView;
+use yii\grid\ActionColumn;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Classroom */
 
@@ -9,15 +11,7 @@ $this->title = 'Thêm lớp học';
 $this->params['breadcrumbs'][] = ['label' => 'Classrooms', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?php
 
-use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\grid\ActionColumn;
-
-$this->title = 'Lớp học';
-$this->params['breadcrumbs'][] = $this->title;
-?>
               <div class="input-group no-border">  
               </div>
             <ul class="navbar-nav">     
@@ -46,20 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
         
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-         'options' => [
-        'class' => 'YourCustomTableClass',],
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            //'id',
-            'name',
-            'teacher_id',
-            'number_student',
-            ['class' => ActionColumn::className(),'template'=>'{update} {delete}' ],
-        ],
-    ]); ?>
     </div>
 </div>
 </div>

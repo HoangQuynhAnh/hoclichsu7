@@ -31,7 +31,7 @@ class StudentController extends Controller
     {
         $model = new StudentForm(); 
         $searchModel = new SearchStudent();
-         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->setPagination(['pageSize' => 10]);
         return $this->render('index', [
             'searchModel' => $searchModel,

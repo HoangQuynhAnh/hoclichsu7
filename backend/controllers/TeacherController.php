@@ -4,6 +4,8 @@ namespace backend\controllers;
 
 use Yii;
 use backend\models\Teacher;
+use backend\models\Admin;
+use backend\models\TeacherForm;
 use backend\models\teacherSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -67,17 +69,20 @@ class TeacherController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Teacher();
-
+        $model = new TeacherForm();
+        $admin= new Admin();
+        $teacher = Teacher::find()->all();
         if ($model->load(Yii::$app->request->post())) {
-            if($model->save()){
-                Yii::$app->session->addFlash('success', 'Thêm thành công');
+            $model->saveform();
+            $password_hash= Teacher::find()->where(['user'=>$model->user])->one();
+            $user=$model->user;
+            $password_hash=$password_hash['password_hash'];
+            Yii::$app->db->createCommand('insert into user (username, password_hash,status) values ("'.$user.'","'.$password_hash.'",'.$model->status.')')->execute();
+        // echo '<pre>';
+        // var_dump($model);
+        // echo '</pre>';
+            Yii::$app->session->addFlash('success', 'Thêm thành công');
             return $this->redirect(['index']);
-            }
-            else{
-                Yii::$app->session->addFlash('error', 'Lỗi');
-
-            }
         }
 
         return $this->render('create', [
@@ -95,7 +100,10 @@ class TeacherController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+             $model->password_hash=password_hash($model->user, PASSWORD_DEFAULT);
+            $model->save();
            return $this->redirect(['index']);
         }
 

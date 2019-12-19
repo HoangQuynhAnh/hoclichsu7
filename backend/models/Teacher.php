@@ -37,13 +37,24 @@ class Teacher extends \yii\db\ActiveRecord
             [['user','name','fullname'],'required'],
             [['user'],'unique'],
             [['id', 'user', 'status'], 'integer'],
-            [['name', 'fullname','birthday', 'sex', 'email', 'address', 'sdt', 'sign','image'], 'string', 'max' => 255],
+             ['user', 'unique', 'targetClass' => '\backend\models\User', 'message' => 'Tài khoản đã được tạo'],
+            [['name', 'fullname','birthday', 'sex','password_hash','password_reset_token', 'email', 'address', 'sdt', 'sign','image'], 'string', 'max' => 255],
+             [['auth_key'], 'string', 'max' => 32],
         ];
     }
 
     /**
      * {@inheritdoc}
      */
+    public function setPassword($password)
+    {
+        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
+    }
     public function attributeLabels()
     {
         return [
@@ -59,6 +70,9 @@ class Teacher extends \yii\db\ActiveRecord
             'status' => 'Trạng thái',
             'image' => 'Ảnh',
             'fullname'=>'Họ tên đệm',
+            'password_reset_token' => 'Password Reset Token',
+            'auth_key' => 'Auth Key',
+            'password_hash' => 'Password Hash',
 
         ];
     }
