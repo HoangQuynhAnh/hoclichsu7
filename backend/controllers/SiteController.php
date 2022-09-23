@@ -21,6 +21,7 @@ class SiteController extends Controller
      */
     public function behaviors()
     {
+        // hello
         return [
             'access' => [
                 'class' => AccessControl::className(),
